@@ -1,0 +1,8 @@
+{
+  "server": {
+    "baseDir": "public/src",
+    "routes": {
+      "/node_modules": "node_modules"
+    }
+  }
+}
