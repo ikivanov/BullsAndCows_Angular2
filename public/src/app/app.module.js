@@ -15,6 +15,7 @@ var footer_component_1 = require("./reusables/footer.component");
 var number_selector_component_1 = require("./reusables/number-selector.component");
 var server_output_component_1 = require("./reusables/server-output.component");
 var human_vs_computer_component_1 = require("./human-vs-computer.component");
+var computer_vs_computer_component_1 = require("./computer-vs-computer.component");
 var app_routing_module_1 = require("./app-routing.module");
 var AppModule = (function () {
     function AppModule() {
@@ -31,9 +32,10 @@ AppModule = __decorate([
             footer_component_1.FooterComponent,
             number_selector_component_1.NumberSelectorComponent,
             server_output_component_1.ServerOutputComponent,
-            human_vs_computer_component_1.HumanVsComputerComponent
+            human_vs_computer_component_1.HumanVsComputerComponent,
+            computer_vs_computer_component_1.ComputerVsComputerComponent
         ],
-        bootstrap: [human_vs_computer_component_1.HumanVsComputerComponent]
+        bootstrap: [computer_vs_computer_component_1.ComputerVsComputerComponent]
     })
 ], AppModule);
 exports.AppModule = AppModule;

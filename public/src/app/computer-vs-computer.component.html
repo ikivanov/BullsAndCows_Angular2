@@ -1,0 +1,24 @@
+<div id="workspace" class="workspace">
+	<title></title>
+
+	<header title="Single Player:" description="Computer vs Computer"></header>
+
+	<table class="game-table">
+		<tbody>
+			<tr>
+				<td>
+					<button class="new-game-button"
+							(click)="onStartBtnClicked()">Start New Game</button>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<server-output [output]="guesses"></server-output>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<footer></footer>
+</div>

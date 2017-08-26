@@ -18,7 +18,7 @@ var AppComponent = (function () {
         this.router.navigate(['/humanVsComputer']);
     };
     AppComponent.prototype.gotoComputerVsComputer = function () {
-        alert('gotoComputerVsComputer');
+        this.router.navigate(['/computerVsComputer']);
     };
     AppComponent.prototype.gotoMultiplayer = function () {
         alert('gotoMultiplayer');

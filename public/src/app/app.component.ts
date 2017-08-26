@@ -15,7 +15,7 @@ export class AppComponent {
 	}
 
 	gotoComputerVsComputer(): void {
-		alert('gotoComputerVsComputer');
+	    this.router.navigate(['/computerVsComputer']);
 	}
 
 	gotoMultiplayer(): void {

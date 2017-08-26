@@ -8,9 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var human_vs_computer_component_1 = require("./human-vs-computer.component");
+var computer_vs_computer_component_1 = require("./computer-vs-computer.component");
 var routes = [
-    { path: 'src', component: human_vs_computer_component_1.HumanVsComputerComponent },
-    { path: 'src/humanVsComputer', component: human_vs_computer_component_1.HumanVsComputerComponent }
+    { path: 'src', component: computer_vs_computer_component_1.ComputerVsComputerComponent },
+    { path: 'src/humanVsComputer', component: human_vs_computer_component_1.HumanVsComputerComponent },
+    { path: 'src/computerVsComputer', component: computer_vs_computer_component_1.ComputerVsComputerComponent }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {

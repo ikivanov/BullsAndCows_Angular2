@@ -10,6 +10,7 @@ import { NumberSelectorComponent } from './reusables/number-selector.component';
 import { ServerOutputComponent } from './reusables/server-output.component';
 
 import { HumanVsComputerComponent } from './human-vs-computer.component';
+import { ComputerVsComputerComponent } from './computer-vs-computer.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -22,9 +23,10 @@ import { AppRoutingModule } from './app-routing.module';
 		FooterComponent,
 		NumberSelectorComponent,
 		ServerOutputComponent,
-		HumanVsComputerComponent
+		HumanVsComputerComponent,
+		ComputerVsComputerComponent
 	],
-  bootstrap: [ HumanVsComputerComponent ]
+  bootstrap: [ ComputerVsComputerComponent ]
 })
 
 export class AppModule { }
