@@ -19,7 +19,7 @@ export class AppComponent {
 	}
 
 	gotoMultiplayer(): void {
-		alert('gotoMultiplayer');
+	    this.router.navigate(['/multiplayer']);
 	}
 
 	gotoPeer2Peer(): void {

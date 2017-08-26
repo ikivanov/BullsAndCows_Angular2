@@ -11,6 +11,10 @@ import { ServerOutputComponent } from './reusables/server-output.component';
 
 import { HumanVsComputerComponent } from './human-vs-computer.component';
 import { ComputerVsComputerComponent } from './computer-vs-computer.component';
+import { MultiplayerComponent } from './multiplayer.component';
+import { MultiplayerStep1Component } from './multiplayer/multiplayer-step1.component';
+import { MultiplayerStep2Component } from './multiplayer/multiplayer-step2.component';
+import { MultiplayerStep3Component } from './multiplayer/multiplayer-step3.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -24,9 +28,13 @@ import { AppRoutingModule } from './app-routing.module';
 		NumberSelectorComponent,
 		ServerOutputComponent,
 		HumanVsComputerComponent,
-		ComputerVsComputerComponent
+		ComputerVsComputerComponent,
+		MultiplayerComponent,
+		MultiplayerStep1Component,
+		MultiplayerStep2Component,
+		MultiplayerStep3Component
 	],
-  bootstrap: [ ComputerVsComputerComponent ]
+  bootstrap: [ MultiplayerComponent ]
 })
 
 export class AppModule { }

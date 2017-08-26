@@ -1,0 +1,58 @@
+<table class="game-table">
+	<tbody>
+		<tr>
+			<td>
+				<label>1. Enter your nickname </label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="text" [(ngModel)]="nickname" />
+			</td>
+		</tr>
+		<tr>
+			<td><br/></td>
+		</tr>
+		<tr>
+			<td>
+				<label>2. Create new game</label>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="text" [(ngModel)]="gameName" />
+			</td>
+			<td colspan="2">
+				<button [disabled]="nickname.length === 0 || gameName.length === 0"
+						(click)="onCreateGameBtnClicked()">
+					Create Game
+				</button>
+			</td>
+		</tr>
+		<tr>
+			<td><br/></td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<label>or join an existing one</label>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<select class="full-width"
+					[(ngModel)]="selectedGameId"
+					[disabled]="gamesList.length === 0">
+					<option *ngFor="let game of gamesList" [value]="game.id">
+						{{game.name}}
+					</option>
+				</select>
+			</td>
+			<td colspan="2">
+				<button [disabled]="nickname.length === 0 || selectedGameId.length === 0"
+						(click)="onJoinGameBtnClicked()">
+					Join Game
+				</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

@@ -21,7 +21,7 @@ var AppComponent = (function () {
         this.router.navigate(['/computerVsComputer']);
     };
     AppComponent.prototype.gotoMultiplayer = function () {
-        alert('gotoMultiplayer');
+        this.router.navigate(['/multiplayer']);
     };
     AppComponent.prototype.gotoPeer2Peer = function () {
         alert('gotoPeer2Peer');
