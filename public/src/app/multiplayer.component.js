@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require("@angular/core");
 var io = require("socket.io-client");
+var botPlayer_1 = require("./botPlayer");
 var consts = require("./consts");
 var MultiplayerComponent = (function () {
     function MultiplayerComponent() {
@@ -114,6 +115,7 @@ var MultiplayerComponent = (function () {
         }, function (data) { return _this.onGameJoined(data); });
     };
     MultiplayerComponent.prototype.onGameJoined = function (data) {
+        alert("onGameJoined");
         var success = data.success;
         if (!success) {
             alert(data.msg);
@@ -146,8 +148,59 @@ var MultiplayerComponent = (function () {
         this.gamePlayers = data.players;
     };
     MultiplayerComponent.prototype.onAddBot = function () {
-        var botSocket = io.connect(consts.SERVER_ADDRESS, { 'forceNew': true }), nickname = "botPlayer_" + new Date().getTime(), bot = new BotPlayer(null, botSocket, this.gameId, nickname);
+        var botSocket = io.connect(consts.SERVER_ADDRESS, { 'forceNew': true }), nickname = "botPlayer_" + new Date().getTime(), bot = new botPlayer_1.default(null, botSocket, this.gameId, nickname);
         bot.joinGame(this.gameId);
+    };
+    MultiplayerComponent.prototype.onStartGame = function () {
+        var _this = this;
+        this.socket.emit(consts.START_GAME_EVENT, {
+            gameId: this.gameId,
+            playerToken: this.playerToken
+        }, function (data) { return _this.onGameStarted(data); });
+    };
+    MultiplayerComponent.prototype.onGameStarted = function (data) {
+        var success = data.success;
+        if (!success) {
+            alert(data.msg);
+            return;
+        }
+        this.isRunning = true;
+        this.guesses = [];
+        this.step = 2;
+    };
+    MultiplayerComponent.prototype.onPlayerTurn = function (data) {
+        if (data.nickname == this.nickname) {
+            this.isMyTurn = true;
+        }
+    };
+    MultiplayerComponent.prototype.onGameOver = function (data) {
+        var winStr = data.win ? "win" : "lose", result = "Game over! You " + winStr + "! Number is: " + data.number.join('');
+        this.guesses.push(result);
+        this.isGameOver = true;
+        this.isRunning = false;
+        this.gameId = "";
+        this.closeSocket();
+    };
+    MultiplayerComponent.prototype.onGuessNumber = function (data) {
+        if (data.nickname === this.nickname) {
+            return;
+        }
+        this.onGuessResponse(data);
+    };
+    MultiplayerComponent.prototype.onGuess = function (number) {
+        var _this = this;
+        this.socket.emit(consts.GUESS_NUMBER_EVENT, {
+            gameId: this.gameId,
+            playerToken: this.playerToken,
+            number: number
+        }, function (data) {
+            _this.onGuessResponse(data);
+            _this.isMyTurn = false;
+        });
+    };
+    MultiplayerComponent.prototype.onGuessResponse = function (data) {
+        var bulls = data.bulls, cows = data.cows, number = data.number;
+        this.guesses.push(data.nickname + ": " + number.join('') + ", bulls: " + bulls + ", cows: " + cows);
     };
     MultiplayerComponent.prototype.closeSocket = function () {
         this.socket.removeAllListeners();

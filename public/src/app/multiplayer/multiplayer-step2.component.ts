@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'multiplayer-step2',
@@ -6,9 +6,19 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class MultiplayerStep2Component implements OnInit {
+	@Input() gameName: string = "";
+	@Input() gamePlayers: any[] = [];
+	@Output() addBot = new EventEmitter();
+	@Output() startGame = new EventEmitter();
+
 	ngOnInit(): void {
 	}
 
-	initSocket () {
+	onAddBotBtnClicked() {
+		this.addBot.emit();
+	}
+
+	onStartGameBtnClicked() {
+		this.startGame.emit();
 	}
 }

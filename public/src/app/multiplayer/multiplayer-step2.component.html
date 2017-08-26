@@ -1,3 +1,42 @@
-<div>
-	multiplayer step 2
-</div>
+<table class="game-table">
+	<tbody>
+		<tr>
+			<td colspan="2">
+				<label>Game name:</label>
+			</td>
+			<td colspan="2">
+				<label>{{ gameName }}</label>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<button (click)="onAddBotBtnClicked()">Add Bot</button>
+			</td>
+		</tr>
+		<tr>
+			<td><br/></td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<label>Players:</label>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<select class="full-width" multiple size="5">
+					<option *ngFor="let player of gamePlayers">
+						{{ player }}
+					</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><br/></td>
+		</tr>
+		<tr>
+			<td colspan="4" class="text-center">
+				<button (click)="onStartGameBtnClicked()">Start Game!</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

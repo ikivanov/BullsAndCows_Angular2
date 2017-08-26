@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import * as io from "socket.io-client";
 
+import BotPlayer from "./botPlayer";
 import * as consts from "./consts";
 
 @Component({
@@ -145,6 +146,8 @@ export class MultiplayerComponent implements OnInit {
 	}
 
 	onGameJoined(data) {
+		alert("onGameJoined");
+
 		let success = data.success;
 
 		if (!success) {
@@ -191,6 +194,75 @@ export class MultiplayerComponent implements OnInit {
 			bot = new BotPlayer(null, botSocket, this.gameId, nickname);
 
 		bot.joinGame(this.gameId);
+	}
+
+	onStartGame() {
+		this.socket.emit(consts.START_GAME_EVENT, {
+			gameId: this.gameId,
+			playerToken: this.playerToken
+			},
+			(data) => this.onGameStarted(data)
+		);
+	}
+
+	onGameStarted(data) {
+		let success = data.success;
+
+		if (!success) {
+			alert(data.msg);
+			return;
+		}
+
+		this.isRunning = true;
+		this.guesses = [];
+		this.step = 2
+	}
+
+	onPlayerTurn(data) {
+		if (data.nickname == this.nickname) {
+			this.isMyTurn = true;
+		}
+	}
+
+	onGameOver(data) {
+		let winStr = data.win ? "win" : "lose",
+			result = "Game over! You " + winStr + "! Number is: " + data.number.join('');
+
+		this.guesses.push(result);
+
+		this.isGameOver = true;
+		this.isRunning = false;
+
+		this.gameId = "";
+
+		this.closeSocket();
+	}
+
+	onGuessNumber(data) {
+		if (data.nickname === this.nickname) {
+			return;
+		}
+
+		this.onGuessResponse(data);
+	}
+
+	onGuess(number) {
+		this.socket.emit(consts.GUESS_NUMBER_EVENT, {
+			gameId: this.gameId,
+			playerToken: this.playerToken,
+			number
+		}, (data) => {
+			this.onGuessResponse(data);
+			this.isMyTurn = false;
+		});
+	}
+
+	onGuessResponse(data) {
+		let bulls = data.bulls,
+			cows = data.cows,
+			number = data.number;
+
+		this.guesses.push(data.nickname + ": " + number.join('') + ", bulls: " + bulls + ", cows: " + cows);
 	}
 
 	closeSocket() {

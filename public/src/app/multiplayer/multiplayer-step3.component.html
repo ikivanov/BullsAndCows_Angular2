@@ -1,3 +1,28 @@
-<div>
-	multiplayer step 3
-</div>
+<table className="game-table">
+	<tbody>
+		<tr>
+			<td>
+				<number-selector [disabled]="this.isRunning"
+					(guess)="onGuess()"
+					>
+				</number-selector>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<server-output [output]="guesses"></server-output>
+
+				<div class="awaiting-game-progress" *ngIf="!isRunning && !isGameOver">
+					<img src="../img/waiting.gif" />
+					<span>Awaiting game start...</span>
+				</div>
+
+				<div class="awaiting-turn-progress" *ngIf="isRunning && !isMyTurn">
+					<img src="../img/waiting.gif" />
+					<span>Please wait for your turn...</span>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
