@@ -1,11 +1,30 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
-import { AppComponent }  from './app.component';
+import { AppComponent } from './app.component';
+import { TitleComponent } from './reusables/title.component';
+import { HeaderComponent } from './reusables/header.component';
+import { FooterComponent } from './reusables/footer.component';
+import { NumberSelectorComponent } from './reusables/number-selector.component';
+import { ServerOutputComponent } from './reusables/server-output.component';
+
+import { HumanVsComputerComponent } from './human-vs-computer.component';
+
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  imports:      [ BrowserModule ],
-  declarations: [ AppComponent ],
-  bootstrap:    [ AppComponent ]
+	imports: [ BrowserModule, AppRoutingModule, FormsModule ],
+	declarations: [
+		AppComponent,
+		TitleComponent,
+		HeaderComponent,
+		FooterComponent,
+		NumberSelectorComponent,
+		ServerOutputComponent,
+		HumanVsComputerComponent
+	],
+  bootstrap: [ HumanVsComputerComponent ]
 })
+
 export class AppModule { }

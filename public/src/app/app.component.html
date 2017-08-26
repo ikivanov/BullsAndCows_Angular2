@@ -1,0 +1,36 @@
+<div id="workspace" class="workspace">
+	<div id="game_root">
+		<header title="Welcome to" description="Bulls and Cows"></header>
+
+		<div class="info-title">
+			<div>Please select a game type:</div>
+		</div>
+
+		<table class="game-table">
+			<tbody>
+				<tr>
+					<td>
+						<button class="game-menu-button" (click)="gotoHumanVsComputer()">Human vs. Computer</button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button class="game-menu-button" (click)="gotoComputerVsComputer()">Computer vs. Computer</button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button class="game-menu-button" (click)="gotoMultiplayer()">Multiplayer</button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button class="game-menu-button" (click)="gotoPeer2Peer()">Peer to Peer</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<footer></footer>
+	</div>
+</div>

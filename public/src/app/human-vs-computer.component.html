@@ -1,0 +1,35 @@
+<div id="workspace" class="workspace">
+	<title></title>
+
+	<header title="Single Player:" description="Human vs Computer"></header>
+
+	<table class="game-table">
+		<tbody>
+			<tr>
+				<td colspan="2">
+					<button class="new-game-button"
+							(click)="onStartBtnClicked()">Start New Game</button>
+				</td>
+				<td colspan="2">
+					<button class="surrender-button"
+							[disabled]="!isRunning"
+							(click)="onSurrenderBtnClicked()">Surrender</button>
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan="4">
+					<number-selector [disabled]="!isRunning" (guess)="onGuess($event)"></number-selector>
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan="4">
+					<server-output [output]="guesses"></server-output>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<footer></footer>
+</div>

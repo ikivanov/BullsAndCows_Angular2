@@ -7,7 +7,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
+var forms_1 = require("@angular/forms");
 var app_component_1 = require("./app.component");
+var title_component_1 = require("./reusables/title.component");
+var header_component_1 = require("./reusables/header.component");
+var footer_component_1 = require("./reusables/footer.component");
+var number_selector_component_1 = require("./reusables/number-selector.component");
+var server_output_component_1 = require("./reusables/server-output.component");
+var human_vs_computer_component_1 = require("./human-vs-computer.component");
+var app_routing_module_1 = require("./app-routing.module");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -15,9 +23,17 @@ var AppModule = (function () {
 }());
 AppModule = __decorate([
     core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule],
-        declarations: [app_component_1.AppComponent],
-        bootstrap: [app_component_1.AppComponent]
+        imports: [platform_browser_1.BrowserModule, app_routing_module_1.AppRoutingModule, forms_1.FormsModule],
+        declarations: [
+            app_component_1.AppComponent,
+            title_component_1.TitleComponent,
+            header_component_1.HeaderComponent,
+            footer_component_1.FooterComponent,
+            number_selector_component_1.NumberSelectorComponent,
+            server_output_component_1.ServerOutputComponent,
+            human_vs_computer_component_1.HumanVsComputerComponent
+        ],
+        bootstrap: [human_vs_computer_component_1.HumanVsComputerComponent]
     })
 ], AppModule);
 exports.AppModule = AppModule;

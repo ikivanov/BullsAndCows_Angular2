@@ -1,0 +1,60 @@
+<div>
+	<table style="width:260px;">
+		<tbody>
+			<tr>
+				<td>
+					<input type="number"
+							class="guess-number-textbox"
+							min="1" max="9"
+							[disabled]="disabled"
+							(ngModelChange)="onNumberChanged()"
+							[(ngModel)]="number1"
+						/>
+				</td>
+				<td>
+					<input type="number"
+							class="guess-number-textbox"
+							min="0" max="9"
+							[disabled]="disabled"
+							(ngModelChange)="onNumberChanged()"
+							[(ngModel)]="number2"
+						/>
+				</td>
+				<td>
+					<input type="number"
+							class="guess-number-textbox"
+							min="0" max="9"
+							[disabled]="disabled"
+							(ngModelChange)="onNumberChanged()"
+							[(ngModel)]="number3"
+						/>
+				</td>
+				<td>
+					<input type="number"
+							class="guess-number-textbox"
+							min="0" max="9"
+							[disabled]="disabled"
+							(ngModelChange)="onNumberChanged()"
+							[(ngModel)]="number4"
+						/>
+				</td>
+			</tr>
+
+			<tr>
+				<td colSpan="4">
+					<button class="guess-button"
+							[disabled]="disabled || !isValidInput"
+							(click)="onGuessBtnClicked()">
+						Make a guess
+					</button>
+				</td>
+			</tr>
+
+			<tr *ngIf="!isValidInput">
+				<td colSpan="4">
+					<div class="validation-footer">Guess number cannot contain <br />duplicating digits!</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
