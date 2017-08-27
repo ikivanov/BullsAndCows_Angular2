@@ -24,7 +24,7 @@ var HomeComponent = (function () {
         this.router.navigate(['/multiplayer']);
     };
     HomeComponent.prototype.gotoPeer2Peer = function () {
-        alert('gotoPeer2Peer');
+        this.router.navigate(['/peer2peer']);
     };
     return HomeComponent;
 }());

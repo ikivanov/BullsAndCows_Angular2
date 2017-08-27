@@ -6,16 +6,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
+var Peer2PeerComponent = (function () {
+    function Peer2PeerComponent() {
+        this.step = 0;
     }
-    return AppComponent;
+    return Peer2PeerComponent;
 }());
-AppComponent = __decorate([
+Peer2PeerComponent = __decorate([
     core_1.Component({
-        selector: 'my-app',
-        template: '<router-outlet></router-outlet>',
+        selector: 'peer-2-peer',
+        templateUrl: './peer-2-peer.component.html',
     })
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+], Peer2PeerComponent);
+exports.Peer2PeerComponent = Peer2PeerComponent;
+//# sourceMappingURL=peer-2-peer.component.js.map

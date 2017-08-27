@@ -23,6 +23,6 @@ export class HomeComponent {
 	}
 
 	gotoPeer2Peer(): void {
-		alert('gotoPeer2Peer');
+	    this.router.navigate(['/peer2peer']);
 	}
 }

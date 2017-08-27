@@ -16,6 +16,7 @@ import { MultiplayerComponent } from './multiplayer.component';
 import { MultiplayerStep1Component } from './multiplayer/multiplayer-step1.component';
 import { MultiplayerStep2Component } from './multiplayer/multiplayer-step2.component';
 import { MultiplayerStep3Component } from './multiplayer/multiplayer-step3.component';
+import { Peer2PeerComponent } from './peer-2-peer.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -34,7 +35,8 @@ import { AppRoutingModule } from './app-routing.module';
 		MultiplayerComponent,
 		MultiplayerStep1Component,
 		MultiplayerStep2Component,
-		MultiplayerStep3Component
+		MultiplayerStep3Component,
+		Peer2PeerComponent
 	],
   bootstrap: [ AppComponent ]
 })

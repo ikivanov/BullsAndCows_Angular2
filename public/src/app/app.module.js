@@ -21,6 +21,7 @@ var multiplayer_component_1 = require("./multiplayer.component");
 var multiplayer_step1_component_1 = require("./multiplayer/multiplayer-step1.component");
 var multiplayer_step2_component_1 = require("./multiplayer/multiplayer-step2.component");
 var multiplayer_step3_component_1 = require("./multiplayer/multiplayer-step3.component");
+var peer_2_peer_component_1 = require("./peer-2-peer.component");
 var app_routing_module_1 = require("./app-routing.module");
 var AppModule = (function () {
     function AppModule() {
@@ -43,7 +44,8 @@ AppModule = __decorate([
             multiplayer_component_1.MultiplayerComponent,
             multiplayer_step1_component_1.MultiplayerStep1Component,
             multiplayer_step2_component_1.MultiplayerStep2Component,
-            multiplayer_step3_component_1.MultiplayerStep3Component
+            multiplayer_step3_component_1.MultiplayerStep3Component,
+            peer_2_peer_component_1.Peer2PeerComponent
         ],
         bootstrap: [app_component_1.AppComponent]
     })
