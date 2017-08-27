@@ -115,7 +115,6 @@ var MultiplayerComponent = (function () {
         }, function (data) { return _this.onGameJoined(data); });
     };
     MultiplayerComponent.prototype.onGameJoined = function (data) {
-        alert("onGameJoined");
         var success = data.success;
         if (!success) {
             alert(data.msg);

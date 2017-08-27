@@ -1,30 +1,31 @@
 <div id="workspace" class="workspace">
-	<title></title>
+	<game-title></game-title>
 
 	<header title="Multiplayer:" description="Step {{ step + 1 }} of 3"></header>
 
-	<multiplayer-step1 *ngIf="step === 0"
-						[selectedGameId]="selectedGameId"
-						[gamesList]="gamesList"
-						(createGame)="onCreateGame($event)"
-						(joinGame)="onJoinGame($event)">
-	</multiplayer-step1>
+	<div class="multiplayer">
+		<multiplayer-step1 *ngIf="step === 0"
+							[selectedGameId]="selectedGameId"
+							[gamesList]="gamesList"
+							(createGame)="onCreateGame($event)"
+							(joinGame)="onJoinGame($event)">
+		</multiplayer-step1>
 
-	<multiplayer-step2 *ngIf="step === 1"
-						[gameName]="gameName"
-						[gamePlayers]="gamePlayers"
-						(addBot)="onAddBot($event)"
-						(startGame)="onStartGame($event)">
-	</multiplayer-step2>
+		<multiplayer-step2 *ngIf="step === 1"
+							[gameName]="gameName"
+							[gamePlayers]="gamePlayers"
+							(addBot)="onAddBot($event)"
+							(startGame)="onStartGame($event)">
+		</multiplayer-step2>
 
-	<multiplayer-step3 *ngIf="step === 2"
-						[isGameOver]="isGameOver"
-						[isRunning]="isRunning"
-						[isMyTurn]="isMyTurn"
-						[guesses]="guesses"
-						(guess)="onGuess($event)">
-
-	</multiplayer-step3>
+		<multiplayer-step3 *ngIf="step === 2"
+							[isGameOver]="isGameOver"
+							[isRunning]="isRunning"
+							[isMyTurn]="isMyTurn"
+							[guesses]="guesses"
+							(guess)="onGuess($event)">
+		</multiplayer-step3>
+	</div>
 
 	<footer></footer>
 </div>

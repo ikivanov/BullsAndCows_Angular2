@@ -1,9 +1,9 @@
-<table className="game-table">
+<table class="game-table">
 	<tbody>
 		<tr>
 			<td>
-				<number-selector [disabled]="this.isRunning"
-					(guess)="onGuess()"
+				<number-selector [disabled]="!isRunning || !isMyTurn"
+					(guess)="onGuess($event)"
 					>
 				</number-selector>
 			</td>

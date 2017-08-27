@@ -13,7 +13,7 @@ var TitleComponent = (function () {
 }());
 TitleComponent = __decorate([
     core_1.Component({
-        selector: 'title',
+        selector: 'game-title',
         template: "\n\t\t\t<h1 class=\"welcome-title\">\n\t\t\t\t<div>Welcome to</div>\n\t\t\t\t<div>Bulls and Cows!</div>\n\t\t\t</h1>\n\t"
     })
 ], TitleComponent);

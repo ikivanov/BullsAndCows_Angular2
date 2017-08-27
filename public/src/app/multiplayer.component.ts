@@ -146,8 +146,6 @@ export class MultiplayerComponent implements OnInit {
 	}
 
 	onGameJoined(data) {
-		alert("onGameJoined");
-
 		let success = data.success;
 
 		if (!success) {
