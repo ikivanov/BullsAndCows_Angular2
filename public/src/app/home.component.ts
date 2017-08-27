@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'my-app',
-  template: '<router-outlet></router-outlet>',
+  selector: 'home',
+  templateUrl: './home.component.html',
 })
 
-export class AppComponent {
+export class HomeComponent {
 	constructor(private router: Router) {
 	}
 
@@ -23,6 +23,6 @@ export class AppComponent {
 	}
 
 	gotoPeer2Peer(): void {
-		alert('Not Implemented!');
+		alert('gotoPeer2Peer');
 	}
 }

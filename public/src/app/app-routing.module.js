@@ -7,14 +7,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var home_component_1 = require("./home.component");
 var human_vs_computer_component_1 = require("./human-vs-computer.component");
 var computer_vs_computer_component_1 = require("./computer-vs-computer.component");
 var multiplayer_component_1 = require("./multiplayer.component");
 var routes = [
-    { path: 'src', component: multiplayer_component_1.MultiplayerComponent },
-    { path: 'src/humanVsComputer', component: human_vs_computer_component_1.HumanVsComputerComponent },
-    { path: 'src/computerVsComputer', component: computer_vs_computer_component_1.ComputerVsComputerComponent },
-    { path: 'src/multiplayer', component: multiplayer_component_1.MultiplayerComponent }
+    { path: '', redirectTo: 'home', pathMatch: "full" },
+    { path: 'home', component: home_component_1.HomeComponent },
+    { path: 'humanVsComputer', component: human_vs_computer_component_1.HumanVsComputerComponent },
+    { path: 'computerVsComputer', component: computer_vs_computer_component_1.ComputerVsComputerComponent },
+    { path: 'multiplayer', component: multiplayer_component_1.MultiplayerComponent }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {

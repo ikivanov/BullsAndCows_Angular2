@@ -14,6 +14,7 @@ var header_component_1 = require("./reusables/header.component");
 var footer_component_1 = require("./reusables/footer.component");
 var number_selector_component_1 = require("./reusables/number-selector.component");
 var server_output_component_1 = require("./reusables/server-output.component");
+var home_component_1 = require("./home.component");
 var human_vs_computer_component_1 = require("./human-vs-computer.component");
 var computer_vs_computer_component_1 = require("./computer-vs-computer.component");
 var multiplayer_component_1 = require("./multiplayer.component");
@@ -36,6 +37,7 @@ AppModule = __decorate([
             footer_component_1.FooterComponent,
             number_selector_component_1.NumberSelectorComponent,
             server_output_component_1.ServerOutputComponent,
+            home_component_1.HomeComponent,
             human_vs_computer_component_1.HumanVsComputerComponent,
             computer_vs_computer_component_1.ComputerVsComputerComponent,
             multiplayer_component_1.MultiplayerComponent,
@@ -43,7 +45,7 @@ AppModule = __decorate([
             multiplayer_step2_component_1.MultiplayerStep2Component,
             multiplayer_step3_component_1.MultiplayerStep3Component
         ],
-        bootstrap: [multiplayer_component_1.MultiplayerComponent]
+        bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);
 exports.AppModule = AppModule;

@@ -10,30 +10,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var AppComponent = (function () {
-    function AppComponent(router) {
+var HomeComponent = (function () {
+    function HomeComponent(router) {
         this.router = router;
     }
-    AppComponent.prototype.gotoHumanVsComputer = function () {
+    HomeComponent.prototype.gotoHumanVsComputer = function () {
         this.router.navigate(['/humanVsComputer']);
     };
-    AppComponent.prototype.gotoComputerVsComputer = function () {
+    HomeComponent.prototype.gotoComputerVsComputer = function () {
         this.router.navigate(['/computerVsComputer']);
     };
-    AppComponent.prototype.gotoMultiplayer = function () {
+    HomeComponent.prototype.gotoMultiplayer = function () {
         this.router.navigate(['/multiplayer']);
     };
-    AppComponent.prototype.gotoPeer2Peer = function () {
-        alert('Not Implemented!');
+    HomeComponent.prototype.gotoPeer2Peer = function () {
+        alert('gotoPeer2Peer');
     };
-    return AppComponent;
+    return HomeComponent;
 }());
-AppComponent = __decorate([
+HomeComponent = __decorate([
     core_1.Component({
-        selector: 'my-app',
-        template: '<router-outlet></router-outlet>',
+        selector: 'home',
+        templateUrl: './home.component.html',
     }),
     __metadata("design:paramtypes", [router_1.Router])
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+], HomeComponent);
+exports.HomeComponent = HomeComponent;
+//# sourceMappingURL=home.component.js.map

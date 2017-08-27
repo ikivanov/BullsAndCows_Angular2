@@ -2,6 +2,7 @@
 var express = require('express');
 var GameServer = require('./server').Server;
 var socketIO = require('socket.io');
+var path = require('path');
 
 var consts = require('./consts.js').consts;
 
@@ -12,7 +13,8 @@ var app = express(),
 	server = require('http').createServer(app),
 	io = socketIO.listen(server);
 
-app.use("/", express.static('public'));
+app.use("/", express.static(path.join(__dirname, 'public')));
+app.use("/", express.static(path.join(__dirname, 'public/src')));
 
 server.listen(port, "localhost", () => {
 	console.log("Bull and Cows Server is listening...");

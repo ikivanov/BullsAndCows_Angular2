@@ -9,6 +9,7 @@ import { FooterComponent } from './reusables/footer.component';
 import { NumberSelectorComponent } from './reusables/number-selector.component';
 import { ServerOutputComponent } from './reusables/server-output.component';
 
+import { HomeComponent } from './home.component';
 import { HumanVsComputerComponent } from './human-vs-computer.component';
 import { ComputerVsComputerComponent } from './computer-vs-computer.component';
 import { MultiplayerComponent } from './multiplayer.component';
@@ -27,6 +28,7 @@ import { AppRoutingModule } from './app-routing.module';
 		FooterComponent,
 		NumberSelectorComponent,
 		ServerOutputComponent,
+		HomeComponent,
 		HumanVsComputerComponent,
 		ComputerVsComputerComponent,
 		MultiplayerComponent,
@@ -34,7 +36,7 @@ import { AppRoutingModule } from './app-routing.module';
 		MultiplayerStep2Component,
 		MultiplayerStep3Component
 	],
-  bootstrap: [ MultiplayerComponent ]
+  bootstrap: [ AppComponent ]
 })
 
 export class AppModule { }
