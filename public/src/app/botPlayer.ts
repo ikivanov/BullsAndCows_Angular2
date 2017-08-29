@@ -1,30 +1,25 @@
 import * as consts from "./consts";
 
 export default class BotPlayer {
-	constructor(viewModel, socket, gameId, nickname, playerToken) {
+	constructor(viewModel, backendService, gameId, nickname, playerToken) {
 		this.viewModel = viewModel;
-		this.socket = socket;
+		this.backendService = backendService;
 		this.gameId = gameId;
 		this.playerToken = playerToken;
 		this.nickname = nickname ? nickname : "botPlayer_" + new Date().getTime();
 
-		this.socket.on(
-			consts.PLAYER_TURN_SERVER_EVENT,
-			(data) => this.onPlayerTurn(data)
-		);
+		this.playerTurnSubscription = this.backendService.playerTurn.subscribe(data => this.onPlayerTurn(data));
 
 		this.answers = this.getPermutations(consts.NUMBER_LENGH, "123456789");
 		this.answers = this.shuffle(this.answers);
 	}
 
+	dispose() {
+		this.playerTurnSubscription.unsubscribe();
+	}
+
 	joinGame(gameId) {
-		this.socket.emit(consts.JOIN_GAME_EVENT,
-			{
-				gameId: gameId,
-				nickname: this.nickname
-			},
-			(data) => this.onGameJoined(data)
-		);
+		this.backendService.joinGame(gameId, this.nickname).then(data => this.onGameJoined(data));
 	}
 
 	onGameJoined(data) {
@@ -50,14 +45,8 @@ export default class BotPlayer {
 		let guessNum = this.answers[0];
 		let arr = guessNum.split('');
 
-		this.socket.emit(consts.GUESS_NUMBER_EVENT,
-			{
-				gameId: this.gameId,
-				playerToken: this.playerToken,
-				number: [arr[0], arr[1], arr[2], arr[3]]
-			},
-			(data) => this.onGuessResponse(data)
-		);
+		this.backendService.guessNumber(this.gameId, this.playerToken, [arr[0], arr[1], arr[2], arr[3]])
+			.then(data => this.onGuessResponse(data));
 	}
 
 	onGuessResponse(data) {

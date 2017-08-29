@@ -1,52 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-
-import * as io from "socket.io-client";
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import * as consts from "./consts";
+
+import { HumanVsComputerService } from './services/human-vs-computer.service';
 
 @Component({
   selector: 'human-vs-computer',
   templateUrl: './human-vs-computer.component.html',
+  providers: [ HumanVsComputerService ]
 })
 
-export class HumanVsComputerComponent implements OnInit {
-	socket: null;
+export class HumanVsComputerComponent implements OnInit, OnDestroy {
 	gameId: "";
 	playerToken: "";
 
 	isRunning: boolean = false;
 	guesses: string[] = [];
 
-	ngOnInit(): void {
-		this.initSocket();
+	constructor(private backendService: HumanVsComputerService) {
 	}
 
-	initSocket () {
-		this.socket = io.connect(consts.SERVER_ADDRESS, { 'forceNew': true });
-
-		this.socket.on(consts.GAME_OVER_EVENT, (data) => {
+	ngOnInit(): void {
+		this.backendService.gameOver.subscribe(data => {
 			this.onGameOver(data);
 		});
 	}
 
-	closeSocket() {
-		this.socket.removeAllListeners();
-		this.socket.disconnect();
-		this.socket = null;
+	ngOnDestroy(): void {
+		this.backendService.gameOver.unsubscribe();
+		this.backendService.disconnect();
 	}
 
 	onStartBtnClicked(): void {
-		if (!this.socket) {
-			this.initSocket();
-		}
-
-		this.socket.emit(consts.CREATE_GAME_EVENT,
-			{
-				name: ("h_vs_c" + new Date().getTime()),
-				nickname: "guest",
-				type: consts.SINGLE_PLAYER
-			},
-			(data) => { this.onGameCreated(data); });
+		this.backendService.createGame(("h_vs_c" + new Date().getTime()),
+										"guest",
+										consts.SINGLE_PLAYER).then(data => {
+			this.onGameCreated(data);
+		});
 	}
 
 	onGameCreated(data) {
@@ -60,50 +50,32 @@ export class HumanVsComputerComponent implements OnInit {
 		this.gameId = data.gameId;
 		this.playerToken = data.playerToken;
 
-		this.socket.emit(consts.START_GAME_EVENT,
-			{
-				gameId: this.gameId,
-				playerToken: this.playerToken
-			},
-			(data) => {
-				let success = data.success;
-				if (!success) {
-					alert(data.msg);
-					return;
-				}
+		this.backendService.startGame(this.gameId, this.playerToken).then(data => {
+			let success = data.success;
+			if (!success) {
+				alert(data.msg);
+				return;
+			}
 
-				this.isRunning = true;
-				this.guesses = [];
+			this.isRunning = true;
+			this.guesses = [];
 		});
 	}
 
 	onSurrenderBtnClicked(): void {
-		this.socket.emit(consts.SURRENDER_GAME_EVENT,
-			{
-				gameId: this.gameId,
-				playerToken: this.playerToken
-			},
-			(data) => {
-				if (!data.success) {
-					alert(data.msg);
-				}
+		this.backendService.surrenderGame(this.gameId, this.playerToken).then(data => {
+			if (!data.success) {
+				alert(data.msg);
 			}
-		);
+		});
 
 		this.isRunning = false;
 	}
 
 	onGuess(number: number): void {
-		this.socket.emit(consts.GUESS_NUMBER_EVENT,
-			{
-				gameId: this.gameId,
-				playerToken: this.playerToken,
-				number
-			},
-			(data) => {
-				this.onGuessResponse(data);
-			}
-		);
+		this.backendService.guessNumber(this.gameId, this.playerToken, number).then(data => {
+			this.onGuessResponse(data);
+		});
 	}
 
 	onGuessResponse(data) {
@@ -123,6 +95,6 @@ export class HumanVsComputerComponent implements OnInit {
 
 		this.gameId = "";
 
-		this.closeSocket();
+		this.backendService.disconnect();
 	}
 }

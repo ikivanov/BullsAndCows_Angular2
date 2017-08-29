@@ -9,11 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var io = require("socket.io-client");
 var consts = require("./consts");
 var botPlayer_js_1 = require("./botPlayer.js");
+var computer_vs_computer_service_1 = require("./services/computer-vs-computer.service");
 var ComputerVsComputerComponent = (function () {
-    function ComputerVsComputerComponent() {
+    function ComputerVsComputerComponent(backendService) {
+        this.backendService = backendService;
         this.isRunning = false;
         this.guesses = [];
         this.nickname = "h_vs_c_" + new Date().getTime();
@@ -24,31 +25,24 @@ var ComputerVsComputerComponent = (function () {
         this.botPlayer = null;
     }
     ComputerVsComputerComponent.prototype.ngOnInit = function () {
-        this.initSocket();
-    };
-    ComputerVsComputerComponent.prototype.initSocket = function () {
         var _this = this;
-        this.socket = io.connect(consts.SERVER_ADDRESS, { 'forceNew': true });
-        this.socket.on(consts.GAME_OVER_EVENT, function (data) {
+        this.backendService.gameOver.subscribe(function (data) {
             _this.onGameOver(data);
         });
     };
-    ComputerVsComputerComponent.prototype.closeSocket = function () {
-        this.socket.removeAllListeners();
-        this.socket.disconnect();
-        this.socket = null;
+    ComputerVsComputerComponent.prototype.ngOnDestroy = function () {
+        this.backendService.gameOver.unsubscribe();
+        this.backendService.disconnect();
     };
     ComputerVsComputerComponent.prototype.onStartBtnClicked = function () {
         var _this = this;
-        this.botPlayer = null;
-        if (!this.socket) {
-            this.initSocket();
+        if (this.botPlayer) {
+            this.botPlayer.dispose();
+            this.botPlayer = null;
         }
-        this.socket.emit(consts.CREATE_GAME_EVENT, {
-            name: this.gameName,
-            nickname: this.nickname,
-            type: this.gameType
-        }, function (data) { _this.onGameCreated(data); });
+        this.backendService.createGame(this.gameName, this.nickname, consts.SINGLE_PLAYER).then(function (data) {
+            _this.onGameCreated(data);
+        });
     };
     ComputerVsComputerComponent.prototype.onGameCreated = function (data) {
         var _this = this;
@@ -59,10 +53,7 @@ var ComputerVsComputerComponent = (function () {
         }
         this.gameId = data.gameId;
         this.playerToken = data.playerToken;
-        this.socket.emit(consts.START_GAME_EVENT, {
-            gameId: this.gameId,
-            playerToken: this.playerToken
-        }, function (data) {
+        this.backendService.startGame(this.gameId, this.playerToken).then(function (data) {
             var success = data.success;
             if (!success) {
                 alert(data.msg);
@@ -71,7 +62,7 @@ var ComputerVsComputerComponent = (function () {
             _this.isRunning = true;
             _this.guesses = [];
         });
-        this.botPlayer = new botPlayer_js_1.default(this, this.socket, this.gameId, this.nickname, this.playerToken);
+        this.botPlayer = new botPlayer_js_1.default(this, this.backendService, this.gameId, this.nickname, this.playerToken);
     };
     ComputerVsComputerComponent.prototype.onGuessResponse = function (data) {
         var bulls = data.bulls, cows = data.cows, number = data.number;
@@ -82,7 +73,7 @@ var ComputerVsComputerComponent = (function () {
         this.guesses.push(result);
         this.isRunning = false;
         this.gameId = "";
-        this.closeSocket();
+        this.backendService.disconnect();
     };
     return ComputerVsComputerComponent;
 }());
@@ -90,8 +81,9 @@ ComputerVsComputerComponent = __decorate([
     core_1.Component({
         selector: 'computer-vs-computer',
         templateUrl: './computer-vs-computer.component.html',
+        providers: [computer_vs_computer_service_1.ComputerVsComputerService]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [computer_vs_computer_service_1.ComputerVsComputerService])
 ], ComputerVsComputerComponent);
 exports.ComputerVsComputerComponent = ComputerVsComputerComponent;
 //# sourceMappingURL=computer-vs-computer.component.js.map

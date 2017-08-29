@@ -38,7 +38,7 @@ import { AppRoutingModule } from './app-routing.module';
 		MultiplayerStep3Component,
 		Peer2PeerComponent
 	],
-  bootstrap: [ AppComponent ]
+	bootstrap: [ AppComponent ]
 })
 
 export class AppModule { }

@@ -1,23 +1,23 @@
 "use strict";
 var consts = require("./consts");
 var BotPlayer = (function () {
-    function BotPlayer(viewModel, socket, gameId, nickname, playerToken) {
+    function BotPlayer(viewModel, backendService, gameId, nickname, playerToken) {
         var _this = this;
         this.viewModel = viewModel;
-        this.socket = socket;
+        this.backendService = backendService;
         this.gameId = gameId;
         this.playerToken = playerToken;
         this.nickname = nickname ? nickname : "botPlayer_" + new Date().getTime();
-        this.socket.on(consts.PLAYER_TURN_SERVER_EVENT, function (data) { return _this.onPlayerTurn(data); });
+        this.playerTurnSubscription = this.backendService.playerTurn.subscribe(function (data) { return _this.onPlayerTurn(data); });
         this.answers = this.getPermutations(consts.NUMBER_LENGH, "123456789");
         this.answers = this.shuffle(this.answers);
     }
+    BotPlayer.prototype.dispose = function () {
+        this.playerTurnSubscription.unsubscribe();
+    };
     BotPlayer.prototype.joinGame = function (gameId) {
         var _this = this;
-        this.socket.emit(consts.JOIN_GAME_EVENT, {
-            gameId: gameId,
-            nickname: this.nickname
-        }, function (data) { return _this.onGameJoined(data); });
+        this.backendService.joinGame(gameId, this.nickname).then(function (data) { return _this.onGameJoined(data); });
     };
     BotPlayer.prototype.onGameJoined = function (data) {
         var success = data.success;
@@ -38,11 +38,8 @@ var BotPlayer = (function () {
         var _this = this;
         var guessNum = this.answers[0];
         var arr = guessNum.split('');
-        this.socket.emit(consts.GUESS_NUMBER_EVENT, {
-            gameId: this.gameId,
-            playerToken: this.playerToken,
-            number: [arr[0], arr[1], arr[2], arr[3]]
-        }, function (data) { return _this.onGuessResponse(data); });
+        this.backendService.guessNumber(this.gameId, this.playerToken, [arr[0], arr[1], arr[2], arr[3]])
+            .then(function (data) { return _this.onGuessResponse(data); });
     };
     BotPlayer.prototype.onGuessResponse = function (data) {
         var gameId = data.gameId, bulls = data.bulls, cows = data.cows, number = data.number;
