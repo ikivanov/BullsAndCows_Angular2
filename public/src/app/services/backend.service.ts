@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 import * as io from "socket.io-client";
 import * as consts from '../consts';
 

@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-
-import * as io from "socket.io-client";
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import BotPlayer from "./botPlayer";
 import * as consts from "./consts";
 
+import { MultiplayerService } from './services/multiplayer.service';
+
 @Component({
   selector: 'multiplayer',
   templateUrl: './multiplayer.component.html',
+  providers: [ MultiplayerService ]
 })
 
 export class MultiplayerComponent implements OnInit {
@@ -28,40 +29,41 @@ export class MultiplayerComponent implements OnInit {
 	isGameCreator: boolean = false;
 	bots: any[] = [];
 
-	ngOnInit(): void {
-		this.initSocket();
-
-		this.listGames();
+	constructor(private backendService: MultiplayerService) {
 	}
 
-	initSocket () {
-		this.socket = io.connect(consts.SERVER_ADDRESS, { 'forceNew': true });
-
-		this.socket.on(consts.GAME_OVER_EVENT, (data) => {
+	ngOnInit(): void {
+		this.backendService.gameOver.subscribe(data => {
 			this.onGameOver(data);
 		});
 
-		this.socket.on(consts.JOIN_GAME_SERVER_EVENT, (data) => {
+		this.backendService.joinGameEvent.subscribe(data => {
 			this.onGameJoined(data);
 		});
 
-		this.socket.on(consts.PLAYER_TURN_SERVER_EVENT, (data) => {
+		this.backendService.playerTurnEvent.subscribe(data => {
 			this.onPlayerTurn(data);
 		});
 
-		this.socket.on(consts.GAME_STARTED_SERVER_EVENT, (data) => {
+		this.backendService.gameStartEvent.subscribe(data => {
 			this.onGameStarted(data);
 		});
 
-		this.socket.on(consts.GUESS_NUMBER_SERVER_EVENT, (data) => {
+		this.backendService.guessNumberEvent.subscribe(data => {
 			this.onGuessNumber(data);
 		});
+
+		this.backendService.ensureConnection();
+		this.backendService.listGames(this.gameType).then(data => this.onGamesListed(data));
 	}
 
-	listGames() {
-		this.socket.emit(consts.LIST_GAMES_EVENT, { type: this.gameType },
-			(data) => this.onGamesListed(data)
-		);
+	ngOnDestroy(): void {
+		this.backendService.gameOver.unsubscribe();
+		this.backendService.joinGameEvent.unsubscribe();
+		this.backendService.playerTurnEvent.unsubscribe();
+		this.backendService.gameStartEvent.unsubscribe();
+		this.backendService.guessNumberEvent.unsubscribe();
+		this.backendService.disconnect();
 	}
 
 	onGamesListed(data) {
@@ -81,20 +83,10 @@ export class MultiplayerComponent implements OnInit {
 
 	onCreateGame(args) {
 		this.nickname = args.nickname,
-		this.gameName = args.gameName
+		this.gameName = args.gameName;
 
-		if (!this.socket) {
-			this.initSocket();
-		}
-
-		this.socket.emit(consts.CREATE_GAME_EVENT,
-			{
-				name: args.gameName,
-				nickname: args.nickname,
-				type: this.gameType
-			},
-			(data) => this.onGameCreated(data)
-		);
+		this.backendService.createGame(this.gameName, this.nickname, this.gameType)
+			.then(data => this.onGameCreated(data));
 	}
 
 	onGameCreated(data) {
@@ -116,21 +108,16 @@ export class MultiplayerComponent implements OnInit {
 	}
 
 	onJoinGame(args) {
-		if (!this.socket) {
-			this.initSocket();
-		}
-
 		this.gameId = args.selectedGameId;
 		this.nickname = args.nickname;
 
-		this.socket.emit(consts.CHECK_NICKNAME_EXISTS_EVENT, {
-			gameId: args.selectedGameId,
-			nickname: args.nickname },
-			(data) => this.onNicknameExistsResponse(data)
-		);
+		debugger;
+		this.backendService.checkNicknameExists(args.selectedGameId, args.nickname)
+			.then(data => this.onNicknameExistsResponse(data));
 	}
 
 	onNicknameExistsResponse(data) {
+		debugger;
 		let exists = data.exists;
 
 		if (exists) {
@@ -138,11 +125,8 @@ export class MultiplayerComponent implements OnInit {
 			return;
 		}
 
-		this.socket.emit(consts.JOIN_GAME_EVENT, {
-			gameId: this.selectedGameId,
-			nickname: this.nickname },
-			(data) => this.onGameJoined(data)
-		);
+		this.backendService.joinGame(this.selectedGameId, this.nickname)
+			.then(data => this.onGameJoined(data));
 	}
 
 	onGameJoined(data) {
@@ -166,13 +150,8 @@ export class MultiplayerComponent implements OnInit {
 	}
 
 	listPlayers() {
-		this.socket.emit(consts.LIST_GAME_PLAYERS_EVENT,
-			{
-				gameId: this.gameId,
-				playerToken: this.playerToken
-			},
-			(data) => this.onPlayersListed(data)
-		);
+		this.backendService.listPlayers(this.gameId, this.playerToken)
+			.then(data => this.onPlayersListed(data));
 	}
 
 	onPlayersListed(data) {
@@ -187,6 +166,8 @@ export class MultiplayerComponent implements OnInit {
 	}
 
 	onAddBot() {
+		throw new Error("Not implemented");
+
 		let botSocket = io.connect(consts.SERVER_ADDRESS, { 'forceNew': true }),
 			nickname = "botPlayer_" + new Date().getTime(),
 			bot = new BotPlayer(null, botSocket, this.gameId, nickname);
@@ -195,12 +176,8 @@ export class MultiplayerComponent implements OnInit {
 	}
 
 	onStartGame() {
-		this.socket.emit(consts.START_GAME_EVENT, {
-			gameId: this.gameId,
-			playerToken: this.playerToken
-			},
-			(data) => this.onGameStarted(data)
-		);
+		this.backendService.startGame(this.gameId, this.playerToken)
+			.then(data => this.onGameStarted(data));
 	}
 
 	onGameStarted(data) {
@@ -233,7 +210,7 @@ export class MultiplayerComponent implements OnInit {
 
 		this.gameId = "";
 
-		this.closeSocket();
+		this.backendService.disconnect();
 	}
 
 	onGuessNumber(data) {
@@ -245,11 +222,7 @@ export class MultiplayerComponent implements OnInit {
 	}
 
 	onGuess(number) {
-		this.socket.emit(consts.GUESS_NUMBER_EVENT, {
-			gameId: this.gameId,
-			playerToken: this.playerToken,
-			number
-		}, (data) => {
+		this.backendService.guessNumber(this.gameId, this.playerToken, number).then(data => {
 			this.onGuessResponse(data);
 			this.isMyTurn = false;
 		});
@@ -261,11 +234,5 @@ export class MultiplayerComponent implements OnInit {
 			number = data.number;
 
 		this.guesses.push(data.nickname + ": " + number.join('') + ", bulls: " + bulls + ", cows: " + cows);
-	}
-
-	closeSocket() {
-		this.socket.removeAllListeners();
-		this.socket.disconnect();
-		this.socket = null;
 	}
 }
