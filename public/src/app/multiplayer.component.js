@@ -93,13 +93,11 @@ var MultiplayerComponent = (function () {
         var _this = this;
         this.gameId = args.selectedGameId;
         this.nickname = args.nickname;
-        debugger;
         this.backendService.checkNicknameExists(args.selectedGameId, args.nickname)
             .then(function (data) { return _this.onNicknameExistsResponse(data); });
     };
     MultiplayerComponent.prototype.onNicknameExistsResponse = function (data) {
         var _this = this;
-        debugger;
         var exists = data.exists;
         if (exists) {
             alert(data.msg);
@@ -139,8 +137,7 @@ var MultiplayerComponent = (function () {
         this.gamePlayers = data.players;
     };
     MultiplayerComponent.prototype.onAddBot = function () {
-        throw new Error("Not implemented");
-        var botSocket = io.connect(consts.SERVER_ADDRESS, { 'forceNew': true }), nickname = "botPlayer_" + new Date().getTime(), bot = new botPlayer_1.default(null, botSocket, this.gameId, nickname);
+        var nickname = "botPlayer_" + new Date().getTime(), bot = new botPlayer_1.default(null, this.backendService, this.gameId, nickname);
         bot.joinGame(this.gameId);
     };
     MultiplayerComponent.prototype.onStartGame = function () {

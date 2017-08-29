@@ -8,7 +8,7 @@ export default class BotPlayer {
 		this.playerToken = playerToken;
 		this.nickname = nickname ? nickname : "botPlayer_" + new Date().getTime();
 
-		this.playerTurnSubscription = this.backendService.playerTurn.subscribe(data => this.onPlayerTurn(data));
+		this.playerTurnSubscription = this.backendService.playerTurnEvent.subscribe(data => this.onPlayerTurn(data));
 
 		this.answers = this.getPermutations(consts.NUMBER_LENGH, "123456789");
 		this.answers = this.shuffle(this.answers);

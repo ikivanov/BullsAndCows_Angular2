@@ -111,13 +111,11 @@ export class MultiplayerComponent implements OnInit {
 		this.gameId = args.selectedGameId;
 		this.nickname = args.nickname;
 
-		debugger;
 		this.backendService.checkNicknameExists(args.selectedGameId, args.nickname)
 			.then(data => this.onNicknameExistsResponse(data));
 	}
 
 	onNicknameExistsResponse(data) {
-		debugger;
 		let exists = data.exists;
 
 		if (exists) {
@@ -166,11 +164,8 @@ export class MultiplayerComponent implements OnInit {
 	}
 
 	onAddBot() {
-		throw new Error("Not implemented");
-
-		let botSocket = io.connect(consts.SERVER_ADDRESS, { 'forceNew': true }),
-			nickname = "botPlayer_" + new Date().getTime(),
-			bot = new BotPlayer(null, botSocket, this.gameId, nickname);
+		let nickname = "botPlayer_" + new Date().getTime(),
+			bot = new BotPlayer(null, this.backendService, this.gameId, nickname);
 
 		bot.joinGame(this.gameId);
 	}
