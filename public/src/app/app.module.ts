@@ -8,6 +8,7 @@ import { HeaderComponent } from './reusables/header.component';
 import { FooterComponent } from './reusables/footer.component';
 import { NumberSelectorComponent } from './reusables/number-selector.component';
 import { ServerOutputComponent } from './reusables/server-output.component';
+import { ProgressBarComponent } from './reusables/progress-bar.component';
 
 import { HomeComponent } from './home.component';
 import { HumanVsComputerComponent } from './human-vs-computer.component';
@@ -30,6 +31,7 @@ import { AppRoutingModule } from './app-routing.module';
 		TitleComponent,
 		HeaderComponent,
 		FooterComponent,
+		ProgressBarComponent,
 		NumberSelectorComponent,
 		ServerOutputComponent,
 		HomeComponent,

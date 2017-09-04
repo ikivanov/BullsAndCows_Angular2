@@ -14,6 +14,7 @@ var header_component_1 = require("./reusables/header.component");
 var footer_component_1 = require("./reusables/footer.component");
 var number_selector_component_1 = require("./reusables/number-selector.component");
 var server_output_component_1 = require("./reusables/server-output.component");
+var progress_bar_component_1 = require("./reusables/progress-bar.component");
 var home_component_1 = require("./home.component");
 var human_vs_computer_component_1 = require("./human-vs-computer.component");
 var computer_vs_computer_component_1 = require("./computer-vs-computer.component");
@@ -39,6 +40,7 @@ AppModule = __decorate([
             title_component_1.TitleComponent,
             header_component_1.HeaderComponent,
             footer_component_1.FooterComponent,
+            progress_bar_component_1.ProgressBarComponent,
             number_selector_component_1.NumberSelectorComponent,
             server_output_component_1.ServerOutputComponent,
             home_component_1.HomeComponent,

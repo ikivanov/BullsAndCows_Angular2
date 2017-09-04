@@ -1,93 +1,93 @@
 *, *:before, *:after {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-    background-image: url("../img/background.png");
-    font-family: Arial, Helvetica, sans-serif;
+	background-image: url("../img/background.png");
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .workspace {
-    width: 350px;
-    background-color: white;
-    opacity: 1;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-top: 100px;
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#88bfe8+0,70b0e0+100;Blue+3D+%2317 */
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d0e4f7+0,73b1e7+24,0a77d5+50,539fe1+79,87bcea+100;Blue+Pipe+%231 */
-    background: #d0e4f7; /* Old browsers */
-    background: -moz-linear-gradient(top, #d0e4f7 0%, #73b1e7 24%, #0a77d5 50%, #539fe1 79%, #87bcea 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d0e4f7), color-stop(24%,#73b1e7), color-stop(50%,#0a77d5), color-stop(79%,#539fe1), color-stop(100%,#87bcea)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* IE10+ */
-    background: linear-gradient(to bottom, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0e4f7', endColorstr='#87bcea',GradientType=0 ); /* IE6-9 */
+	width: 350px;
+	background-color: white;
+	opacity: 1;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 5px;
+	overflow: hidden;
+	margin-top: 100px;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#88bfe8+0,70b0e0+100;Blue+3D+%2317 */
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d0e4f7+0,73b1e7+24,0a77d5+50,539fe1+79,87bcea+100;Blue+Pipe+%231 */
+	background: #d0e4f7; /* Old browsers */
+	background: -moz-linear-gradient(top, #d0e4f7 0%, #73b1e7 24%, #0a77d5 50%, #539fe1 79%, #87bcea 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d0e4f7), color-stop(24%,#73b1e7), color-stop(50%,#0a77d5), color-stop(79%,#539fe1), color-stop(100%,#87bcea)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0e4f7', endColorstr='#87bcea',GradientType=0 ); /* IE6-9 */
 }
 
 .p2p-workspace {
-    width: 570px;
+	width: 570px;
 }
 
 label {
-    font-size: 13px;
-    font-weight: bold;
-    color: white;
+	font-size: 13px;
+	font-weight: bold;
+	color: white;
 }
 
 .full-width {
-    width: 100%;
+	width: 100%;
 }
 
 .text-center {
-    text-align: center;
+	text-align: center;
 }
 
 .welcome-title, .footer, .footer2 {
-    vertical-align: middle;
-    text-align: center;
+	vertical-align: middle;
+	text-align: center;
 }
 
 .footer {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .footer2 {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 .welcome-title {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 .info-title {
-    color: white;
-    border: 1px solid;
-    padding: 10px;
-    border-left: none;
-    border-right: none;
-    text-align: center;
+	color: white;
+	border: 1px solid;
+	padding: 10px;
+	border-left: none;
+	border-right: none;
+	text-align: center;
 }
 
-    .info-title div {
-        margin-bottom: 5px;
-    }
+.info-title div {
+	margin-bottom: 5px;
+}
 
 .multiplayer {
-    margin: 0 15px;
+	margin: 0 15px;
 }
 
 .game-table {
-    width: 250px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    opacity: 1;
-    text-align: center;
+	width: 250px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	opacity: 1;
+	text-align: center;
 }
 
 .multiplayer .game-table {
@@ -95,11 +95,11 @@ label {
 }
 
 .game-table-moves {
-    position: relative;
+	position: relative;
 }
 
 .guess-number-textbox {
-    width: 35px;
+width: 35px;
 }
 
 .game-menu-button {
@@ -108,81 +108,64 @@ label {
 }
 
 .new-game-button, .surrender-button {
-    width: 125px;
+	width: 125px;
 }
 
 .new-game-button, .surrender-button {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .guess-button {
-    width: 100%;
-    margin-top: 8px;
+	width: 100%;
+	margin-top: 8px;
 }
 
 .server-output {
-    width: 260px;
+width: 260px;
 }
 
 .server-opponent-output {
-    width: 260px;
+	width: 260px;
 }
 
 .validation-footer {
-    color: brown;
-    background: pink;
-    border: 1px solid brown;
-    font-size: 13px;
-    padding: 5px;
+	color: brown;
+	background: pink;
+	border: 1px solid brown;
+	font-size: 13px;
+	padding: 5px;
 }
 
 .thinking-progress {
-    position: absolute;
-    border: 1px solid;
-    top: 50%;
-    left: 50%;
-    vertical-align: middle;
-    background-color: #55A0E2;
-    margin-left: -65px;
-    padding: 10px;
-    margin-top: -27px;
+	position: absolute;
+	border: 1px solid;
+	top: 50%;
+	left: 50%;
+	vertical-align: middle;
+	background-color: #55A0E2;
+	margin-left: -65px;
+	padding: 10px;
+	margin-top: -27px;
 }
 
 .thinking_progress img {
-    width: 32px;
-    vertical-align: middle;
+	width: 32px;
+	vertical-align: middle;
 }
 
-.awaiting-game-progress {
-    position: absolute;
-    border: 1px solid;
-    top: 50%;
-    left: 50%;
-    vertical-align: middle;
-    background-color: #55A0E2;
-    margin-left: -110px;
-    padding: 10px;
-    margin-top: -27px;
+.game-progress {
+	position: absolute;
+	border: 1px solid;
+	top: 50%;
+	left: 50%;
+	vertical-align: middle;
+	background-color: #55A0E2;
+	margin-left: -110px;
+	padding: 10px;
+	margin-top: -27px;
 }
 
-.awaiting-game-progress img {
-    width: 32px;
-    vertical-align: middle;
-}
-
-.awaiting-turn-progress {
-    position: absolute;
-    border: 1px solid;
-    top: 50%;
-    left: 50%;
-    vertical-align: middle;
-    background-color: #55A0E2;
-    margin-left: -120px;
-    padding: 10px;
-    margin-top: -27px;
-}
-
-.awaiting-turn-progress img {
-    width: 32px;
-    vertical-align: middle;
+.game-progress img {
+	width: 32px;
+	vertical-align: middle;
 }

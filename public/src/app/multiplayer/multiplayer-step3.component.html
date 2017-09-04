@@ -13,15 +13,13 @@
 			<td>
 				<server-output [output]="guesses"></server-output>
 
-				<div class="awaiting-game-progress" *ngIf="!isRunning && !isGameOver">
-					<img src="../img/waiting.gif" />
-					<span>Awaiting game start...</span>
-				</div>
+				<progress-bar *ngIf="!isRunning && !isGameOver"
+					text="Awaiting game start...">
+				</progress-bar>
 
-				<div class="awaiting-turn-progress" *ngIf="isRunning && !isMyTurn">
-					<img src="../img/waiting.gif" />
-					<span>Please wait for your turn...</span>
-				</div>
+				<progress-bar *ngIf="isRunning && !isMyTurn"
+					text="Please wait for your turn...">
+				</progress-bar>
 			</td>
 		</tr>
 	</tbody>
