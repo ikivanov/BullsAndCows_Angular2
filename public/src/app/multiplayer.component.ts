@@ -22,7 +22,6 @@ export class MultiplayerComponent implements OnInit {
 	isMyTurn: boolean = false;
 	gamesList: any[] = [];
 	gamePlayers: any[] = [];
-	socket: null;
 	gameType: number = consts.MULTIPLAYER;
 	gameId: string = "";
 	playerToken: string = "";

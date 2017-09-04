@@ -1,0 +1,51 @@
+<table class="game-table">
+	<tbody>
+		<tr>
+			<td>
+				<table>
+					<tbody>
+						<tr>
+							<td>
+								<number-selector [disabled]="!isRunning || !isMyTurn"
+									(guess)="onGuess($event)"
+									>
+								</number-selector>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<server-output [output]="guesses"></server-output>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+			<td>
+				<table>
+					<tbody>
+						<tr>
+							<td>
+								Opponent guesses
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<server-output [output]="opponentGuesses"></server-output>
+
+								<div class="awaiting-game-progress" *ngIf="!isRunning && !isGameOver">
+									<img src="../img/waiting.gif" />
+									<span>Awaiting game start...</span>
+								</div>
+
+								<div class="awaiting-turn-progress" *ngIf="isRunning && !isMyTurn">
+									<img src="../img/waiting.gif" />
+									<span>Please wait for your turn...</span>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</tbody>
+</table>

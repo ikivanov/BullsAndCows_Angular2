@@ -22,6 +22,9 @@ var multiplayer_step1_component_1 = require("./multiplayer/multiplayer-step1.com
 var multiplayer_step2_component_1 = require("./multiplayer/multiplayer-step2.component");
 var multiplayer_step3_component_1 = require("./multiplayer/multiplayer-step3.component");
 var peer_2_peer_component_1 = require("./peer-2-peer.component");
+var peer2peer_step1_component_1 = require("./peer2peer/peer2peer-step1.component");
+var peer2peer_step2_component_1 = require("./peer2peer/peer2peer-step2.component");
+var peer2peer_step3_component_1 = require("./peer2peer/peer2peer-step3.component");
 var app_routing_module_1 = require("./app-routing.module");
 var AppModule = (function () {
     function AppModule() {
@@ -45,7 +48,10 @@ AppModule = __decorate([
             multiplayer_step1_component_1.MultiplayerStep1Component,
             multiplayer_step2_component_1.MultiplayerStep2Component,
             multiplayer_step3_component_1.MultiplayerStep3Component,
-            peer_2_peer_component_1.Peer2PeerComponent
+            peer_2_peer_component_1.Peer2PeerComponent,
+            peer2peer_step1_component_1.Peer2PeerStep1Component,
+            peer2peer_step2_component_1.Peer2PeerStep2Component,
+            peer2peer_step3_component_1.Peer2PeerStep3Component
         ],
         bootstrap: [app_component_1.AppComponent]
     })

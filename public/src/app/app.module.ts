@@ -17,6 +17,9 @@ import { MultiplayerStep1Component } from './multiplayer/multiplayer-step1.compo
 import { MultiplayerStep2Component } from './multiplayer/multiplayer-step2.component';
 import { MultiplayerStep3Component } from './multiplayer/multiplayer-step3.component';
 import { Peer2PeerComponent } from './peer-2-peer.component';
+import { Peer2PeerStep1Component } from './peer2peer/peer2peer-step1.component';
+import { Peer2PeerStep2Component } from './peer2peer/peer2peer-step2.component';
+import { Peer2PeerStep3Component } from './peer2peer/peer2peer-step3.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -36,7 +39,10 @@ import { AppRoutingModule } from './app-routing.module';
 		MultiplayerStep1Component,
 		MultiplayerStep2Component,
 		MultiplayerStep3Component,
-		Peer2PeerComponent
+		Peer2PeerComponent,
+		Peer2PeerStep1Component,
+		Peer2PeerStep2Component,
+		Peer2PeerStep3Component
 	],
 	bootstrap: [ AppComponent ]
 })
