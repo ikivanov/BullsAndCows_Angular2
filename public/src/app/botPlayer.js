@@ -8,7 +8,7 @@ var BotPlayer = (function () {
         this.gameId = gameId;
         this.playerToken = playerToken;
         this.nickname = nickname ? nickname : "botPlayer_" + new Date().getTime();
-        this.playerTurnSubscription = this.backendService.playerTurnEvent.subscribe(function (data) { return _this.onPlayerTurn(data); });
+        this.playerTurnSubscription = this.backendService.playerTurn.subscribe(function (data) { return _this.onPlayerTurn(data); });
         this.answers = this.getPermutations(consts.NUMBER_LENGH, "123456789");
         this.answers = this.shuffle(this.answers);
     }
